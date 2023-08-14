@@ -8,7 +8,6 @@ const store = useAboutStore()
 
 onMounted(() => {
   store.getAtributes()
-  console.log('Attribute', store.listData)
 })
 </script>
 

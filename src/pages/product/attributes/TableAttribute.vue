@@ -1,7 +1,7 @@
 <template>
   <q-table dense table-class="q-mx-none" flat class="my-table" color="primary" :virtual-scroll="true"
     card-class="text-black" table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="store.listData.result" row-key="id" v-model:selected="selected"
+    table-header-class="text-grey-7 q-pa-none" :rows="store.data" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
       {
         name: 'id',
@@ -12,9 +12,9 @@
         align: 'left'
       },
       {
-        name: 'attribute_ru',
+        name: 'name',
         label: 'Название атрибута',
-        field: 'attribute_ru',
+        field: 'name',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
@@ -28,9 +28,9 @@
         headerStyle: 'background-color: #f2f2f2;',
       },
       {
-        name: 'goods',
+        name: 'value',
         label: 'Значение атрибута',
-        field: 'uz',
+        field: 'value',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
@@ -58,28 +58,28 @@
     <!-- HEADER -->
     <template #header-cell-id="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
-        {{ props.col.label }}
+        ID
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-client="props">
+    <template #header-cell-name="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
-        {{ props.col.label }}
+        Название
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-status="props">
+    <template #header-cell-view="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
-        {{ props.col.label }}
+        Вид
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-goods="props">
+    <template #header-cell-value="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
-        {{ props.col.label }}
+        Значение
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
@@ -93,14 +93,18 @@
 
     <!-- DATE -->
     <!-- BODY  -->
-    <template #body-cell-goods="props">
+    <template #body-cell-view="props">
       <q-td :props="props">
-        <div v-if="props.row.uz.length > 1" class="row">
-          <q-chip style="background: #9CDAFF;" square v-for="(item, index) in props.row.goods" :key="index">
+        {{ props.row.view }}
+      </q-td>
+    </template>
+    <template #body-cell-value="props">
+      <q-td :props="props">
+        <div class="row">
+          <q-chip style="background: #9CDAFF;" square v-for="(item, index) in props.row.value" :key="index">
             {{ item }}
           </q-chip>
         </div>
-        <div v-else>1 x {{ props.row.uz[0] }}</div>
       </q-td>
     </template>
     <!-- DATE -->
@@ -189,7 +193,7 @@
       </div>
     </template>
     <!-- PAGINATION -->
-  </q-table>{{ selected }}
+  </q-table>
 </template>
 
 <script setup lang="ts">
