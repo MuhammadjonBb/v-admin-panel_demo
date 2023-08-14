@@ -85,29 +85,12 @@ const form = ref({
 })
 const langTab = ref('uz')
 function save() {
-  siteSettingsStore.updateSiteInfo(form.value).then(() => {
-    modalStore.closeModal()
-    Notify.create({
-      message: t('notification.siteSettings.siteInfo.updated'),
-      color: 'positive',
-      position: 'top-right',
-      group: false
-    })
-  }).catch(() => {
-    Notify.create({
-      message: t('notification.siteSettings.siteInfo.updateError'),
-      color: 'negative',
-      position: 'top-right',
-      group: false
-    })
+  modalStore.closeModal()
+  Notify.create({
+    message: t('notification.siteSettings.siteInfo.updated'),
+    color: 'positive',
+    position: 'top-right',
+    group: false
   })
 }
-
-onMounted(() => {
-  siteSettingsStore.getSiteInfo().then(() => {
-    form.value = siteSettingsStore.siteInfo
-  })
-})
 </script>
-
-<style></style>

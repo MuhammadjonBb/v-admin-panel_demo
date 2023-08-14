@@ -84,61 +84,34 @@ watch(() => siteSettingsStore.socialNetworks, () => {
 function save() {
   socialList.value.forEach((el: any) => {
     if (el?.link !== siteSettingsStore.socialNetworks.find((item: any) => item.id === el.id)?.link) {
-      siteSettingsStore.updateSocialNetwork([el]).then(() => {
-        Notify.create({
-          message: t('notification.siteSettings.socials.updated'),
-          color: 'positive',
-          position: 'top-right',
-          group: false
-        })
-      }).catch(() => {
-        Notify.create({
-          message: t('notification.siteSettings.socials.updateError'),
-          color: 'negative',
-          position: 'top-right',
-          group: false
-        })
+      Notify.create({
+        message: t('notification.siteSettings.socials.updated'),
+        color: 'positive',
+        position: 'top-right',
+        group: false
       })
     }
   });
 
   if (createdNetworks.value.items.length > 0) {
     createdNetworks.value.items.forEach((el: any) => {
-      siteSettingsStore.createSocialNetwork(el).then(() => {
-        createdNetworks.value.items = []
-        Notify.create({
-          message: t('notification.siteSettings.socials.created'),
-          color: 'positive',
-          position: 'top-right',
-          group: false
-        })
-      }).catch(() => {
-        Notify.create({
-          message: t('notification.siteSettings.socials.createError'),
-          color: 'negative',
-          position: 'top-right',
-          group: false
-        })
+      createdNetworks.value.items = []
+      Notify.create({
+        message: t('notification.siteSettings.socials.created'),
+        color: 'positive',
+        position: 'top-right',
+        group: false
       })
     })
   }
 }
 
 function deleteSocialNetwork(id: number) {
-  siteSettingsStore.deleteSocialNetwork(id).then(() => {
-    Notify.create({
-      message: t('notification.siteSettings.socials.deleted'),
-      color: 'positive',
-      position: 'top-right',
-      group: false
-    })
-  }).catch(() => {
-    Notify.create({
-      message: t('notification.siteSettings.socials.deleteError'),
-      color: 'negative',
-      position: 'top-right',
-      group: false
-    })
+  Notify.create({
+    message: t('notification.siteSettings.socials.deleted'),
+    color: 'positive',
+    position: 'top-right',
+    group: false
   })
 }
 </script>

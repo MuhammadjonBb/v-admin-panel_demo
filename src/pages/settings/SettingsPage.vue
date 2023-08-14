@@ -6,7 +6,7 @@
       <EditContactsDialog />
       <q-card flat style="border-radius: 12px;">
         <q-card-section>
-          <q-card-section class="row" v-if="siteSettingsStore.siteInfo">
+          <q-card-section class="row">
             <div class="column">
               <h2 class="text-h6">{{ $t('siteSettings.subTitles.siteLangs') }}</h2>
 
@@ -52,7 +52,7 @@
           </q-card-section>
           <q-separator />
 
-          <q-card-section class="column" v-if="siteSettingsStore.siteInfo">
+          <q-card-section class="column">
             <div class="row items-center">
               <h2 class="text-h6">{{ $t('siteSettings.subTitles.contactInfo') }}</h2>
               <q-space></q-space>
@@ -63,13 +63,13 @@
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">{{
                     $t('siteSettings.address') }}</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.siteInfo[`address_${getLocale()}`]
+                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.contacts.address
                   }}</q-item-label>
                 </q-item>
 
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">E-mail</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.siteInfo.email }}</q-item-label>
+                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.contacts.email }}</q-item-label>
                 </q-item>
               </q-list>
 
@@ -77,14 +77,14 @@
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">{{
                     $t('siteSettings.phone') }}</q-item-label>
-                  <q-item-label caption style="font-size: 14px;"> {{ siteSettingsStore.siteInfo.phone
+                  <q-item-label caption style="font-size: 14px;"> {{ siteSettingsStore.contacts.phone
                   }}</q-item-label>
                 </q-item>
 
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">{{
                     $t('siteSettings.schedule') }}</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.siteInfo[`work_${getLocale()}`]
+                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.contacts.schedule
                   }}</q-item-label>
                 </q-item>
               </q-list>
@@ -99,8 +99,8 @@
             </div>
             <div class="column">
               <q-list class="socials-list">
-                <q-item v-if="siteSettingsStore.socialNetworks" style="width: 350px;" class="column q-mb-md"
-                  v-for="item in siteSettingsStore.socialNetworks" :key="item.id">
+                <q-item style="width: 350px;" class="column q-mb-md" v-for="item in siteSettingsStore.socialNetworks"
+                  :key="item.id">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">{{ item.name
                   }}</q-item-label>
                   <q-item-label caption style="font-size: 14px;"> {{ item.link }} </q-item-label>
@@ -137,22 +137,22 @@ const { t } = useI18n()
 const modalStore = useModalStore()
 const siteSettingsStore = useSiteSettingsStore()
 const defaultLang: any = ref({
-  ru: false,
+  ru: true,
   uz: false,
   en: false,
 })
 
-onMounted(() => {
-  siteSettingsStore.getSiteInfo().then(() => {
-    siteSettingsStore.langStatus.lang_ru = siteSettingsStore.siteInfo.lang_ru
-    siteSettingsStore.langStatus.lang_uz = siteSettingsStore.siteInfo.lang_uz
-    siteSettingsStore.langStatus.lang_en = siteSettingsStore.siteInfo.lang_en
+// onMounted(() => {
+//   siteSettingsStore.getSiteInfo().then(() => {
+//     siteSettingsStore.langStatus.lang_ru = siteSettingsStore.siteInfo.lang_ru
+//     siteSettingsStore.langStatus.lang_uz = siteSettingsStore.siteInfo.lang_uz
+//     siteSettingsStore.langStatus.lang_en = siteSettingsStore.siteInfo.lang_en
 
-    islangDefault(siteSettingsStore.siteInfo.default_lang)
-  })
+//     islangDefault(siteSettingsStore.siteInfo.default_lang)
+//   })
 
-  getSocialNetworks()
-})
+//   getSocialNetworks()
+// })
 
 function toggleLang([key1, key2]: [string, string], upadeLang: string): void {
   updateDefaultLang(upadeLang)
@@ -185,38 +185,20 @@ function getSocialNetworks() {
 }
 
 function siteLangUpdate(name: string, status: string): void {
-  siteSettingsStore.siteLangUpdate(name, status).then(() => {
-    Notify.create({
-      message: t('notification.siteSettings.siteLang.updated'),
-      color: 'positive',
-      position: 'top-right',
-      group: false
-    })
-  }).catch(() => {
-    Notify.create({
-      message: t('notification.siteSettings.siteLang.updateError'),
-      color: 'negative',
-      position: 'top-right',
-      group: false
-    })
+  Notify.create({
+    message: t('notification.siteSettings.siteLang.updated'),
+    color: 'positive',
+    position: 'top-right',
+    group: false
   })
 }
 
 function updateDefaultLang(lang: string) {
-  siteSettingsStore.updateDefaultLang(lang).then(() => {
-    Notify.create({
-      message: t('notification.siteSettings.defaultLang.updated'),
-      color: 'positive',
-      position: 'top-right',
-      group: false
-    })
-  }).catch(() => {
-    Notify.create({
-      message: t('notification.siteSettings.defaultLang.updateError'),
-      color: 'negative',
-      position: 'top-right',
-      group: false
-    })
+  Notify.create({
+    message: t('notification.siteSettings.defaultLang.updated'),
+    color: 'positive',
+    position: 'top-right',
+    group: false
   })
 }
 </script>

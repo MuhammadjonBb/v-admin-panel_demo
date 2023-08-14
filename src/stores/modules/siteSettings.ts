@@ -9,11 +9,34 @@ const inputStore = useInputStore()
 export const useSiteSettingsStore: any = defineStore('siteSettings', {
   state: () => ({
     siteInfo: null,
-    socialNetworks: null,
+    socialNetworks: [
+      {
+        name: 'Facebook',
+        link: 'https://www.facebook.com/intex',
+      },
+      {
+        name: 'Instagram',
+        link: 'https://www.instagram.com/intex/',
+      },
+      {
+        name: 'Twitter',
+        link: 'https://twitter.com/intex',
+      },
+      {
+        name: 'Telegram',
+        link: 'https://t.me/intex',
+      }
+    ],
     langStatus: {
       lang_ru: false,
       lang_uz: false,
       lang_en: false
+    },
+    contacts: {
+      address: "Улица Пахлавона Махмуда, Яшнабадский район, город Ташкент",
+      phone: "+998 (90) 128 81 82",
+      email: "intex@gmail.com",
+      schedule: "10:00 - 22:00 Без выходных"
     }
   }),
 
