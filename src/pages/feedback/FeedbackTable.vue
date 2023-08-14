@@ -1,8 +1,8 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
-    selection="multiple" :columns="[
+    table-header-class="text-grey-7 q-pa-none" :rows="data" row-key="id" v-model:selected="selected" selection="multiple"
+    :columns="[
       {
         name: 'id',
         field: 'id',
@@ -109,8 +109,8 @@
     <template #body-cell-date="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ beautifyDate(props.row.created_at)[0] }} </span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at)[1] }}</span>
+          <span> {{ beautifyDate(props.row.date)[0] }} </span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.date)[1] }}</span>
         </div>
       </q-td>
     </template>
@@ -141,7 +141,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
-          {{ data.pageInfo.total_count }} {{ $t('table.items') }}
+          {{ data.length }} {{ $t('table.items') }}
         </div>
 
         <q-space />
@@ -207,7 +207,7 @@ function toEdit(data: object) {
 }
 
 function deleteFeedback(id: number) {
-  feedbackStore.deleteFeedback(id).then(() => {
+  setTimeout(() => {
     Notify.create({
       color: 'positive',
       textColor: 'white',
@@ -215,14 +215,6 @@ function deleteFeedback(id: number) {
       position: 'top-right',
       group: false
     })
-  }).catch(() => {
-    Notify.create({
-      color: 'negative',
-      message: t('notification.consultation.deleteError'),
-      textColor: 'white',
-      position: 'top-right',
-      group: false
-    })
-  })
+  }, 700);
 }
 </script>

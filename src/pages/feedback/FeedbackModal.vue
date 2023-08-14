@@ -35,7 +35,6 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useModalStore } from 'src/stores/modules/modal'
 import { useFeedbackStore } from 'src/stores/modules/feedback'
-import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import { Notify, useQuasar } from 'quasar'
 import { useI18n } from 'vue-i18n'
 import cutPhoneString from "src/helpers/cutPhoneString"
@@ -87,32 +86,16 @@ function save() {
     validation.value = false
     return
   }
-  const data = {
-    name: inputName.value,
-    phone: getPrefix(inputPhone.value) + removeCharacters(inputPhone.value),
-  }
-
   if (props.modalName === 'create') {
-    feedbackStore.createFeedback(data).then(() => {
-      closeModal()
+    closeModal()
 
-      $q.notify({
-        message: t('notification.consultation.created'),
-        color: 'positive',
-        position: 'top-right',
-      })
+    $q.notify({
+      message: t('notification.consultation.created'),
+      color: 'positive',
+      position: 'top-right',
     })
-      .catch(() => {
-        $q.notify({
-          message: t('notification.consultation.createError'),
-          color: 'negative',
-          position: 'top-right',
-        })
-      })
   } else if (props.modalName === 'edit') {
-    feedbackStore.editFeedback(data).then(() => {
-      closeModal()
-    })
+    closeModal()
   }
 }
 

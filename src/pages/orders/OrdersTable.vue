@@ -237,7 +237,7 @@ import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord.js'
 import beautifyDate from 'src/helpers/beautifyDate'
-import { useOrdersStore } from 'src/stores/modules/orders'
+import { useOrdersStore } from 'src/stores/moduls/orders'
 import { useI18n } from 'vue-i18n'
 
 
