@@ -1,26 +1,17 @@
 import { defineStore } from 'pinia'
-import { api } from 'boot/axios'
 import { Notify } from 'quasar'
 
 
 export const useCategoriesStore = defineStore('categories', {
   state: () => ({
-    categories: null,
+    categories: [],
   }),
 
   actions: {
     getCategories() {
-      return api.get('categories').then(r => this.categories = r.data)
-    },
-    postCategory(data: object) {
-      return api.post('categories', data).then(() => {
-        this.getCategories()
+      import("src/fake-data/categories").then(res => {
+        this.categories = res.default
       })
     },
-    deleteCategory(id: number) {
-      return api.delete(`categories/${id}`).then(() => {
-        this.getCategories()
-      })
-    }
   }
 })

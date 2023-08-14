@@ -113,13 +113,11 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 import DefaultInput from 'src/components/input/DefaultInput.vue'
-import { useCategoriesStore } from 'src/stores/modules/products/categories'
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()
 const $q = useQuasar()
-const categoriesStore = useCategoriesStore()
 const subCategoriesArr: any = ref({
   ru: [],
   uz: [],
@@ -158,25 +156,11 @@ function setInvisibleSubcategoryInput(lang: string) {
 }
 
 function save() {
-  if (subCategoriesArr.value.ru.length === subCategoriesArr.value.uz.length && subCategoriesArr.value.ru.length === subCategoriesArr.value.en.length) {
-    let data = [
-      {
-        category_ru: categoryName.value.ru,
-        category_uz: categoryName.value.uz,
-        category_en: categoryName.value.en
-      },
-      ...convertToObj()
-    ]
-    // if (subCategoriesArr.value.ru.length > 0) {
-    //   data = [Object.assign(data[0], ...convertToObj())]
-    // }
-    categoriesStore.postCategory(data).then(() => {
-      clearValues()
-
-      $q.notify({
-        message: t('notification.categories.created'),
-        color: 'positive'
-      })
+  if ((subCategoriesArr.value.ru.length === subCategoriesArr.value.uz.length && subCategoriesArr.value.ru.length === subCategoriesArr.value.en.length) && (categoryName.value.ru !== '' && categoryName.value.uz !== '' && categoryName.value.en !== '')) {
+    clearValues()
+    $q.notify({
+      message: t('notification.categories.created'),
+      color: 'positive'
     })
   } else {
     $q.notify({
@@ -185,18 +169,6 @@ function save() {
       position: 'top-right'
     })
   }
-}
-
-function convertToObj() {
-  const result = []
-  for (let i = 0; i < subCategoriesArr.value.ru.length; i++) {
-    result.push({
-      category_ru: subCategoriesArr.value.ru[i],
-      category_uz: subCategoriesArr.value.uz[i],
-      category_en: subCategoriesArr.value.en[i]
-    })
-  }
-  return result
 }
 
 function clearValues() {

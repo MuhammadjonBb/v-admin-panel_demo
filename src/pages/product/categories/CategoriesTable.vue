@@ -1,8 +1,8 @@
 <template>
   <q-table dense table-class="q-mx-none" flat :pagination="{ rowsPerPage: 10 }"
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
-    selection="multiple" :columns="[
+    table-header-class="text-grey-7 q-pa-none" :rows="data" row-key="id" v-model:selected="selected" selection="multiple"
+    :columns="[
       {
         name: 'id',
         label: 'ID',
@@ -12,25 +12,25 @@
         align: 'left'
       },
       {
-        name: 'category',
+        name: 'name',
         label: `${$t('categories.table.tableHead.categoryName')}`,
-        field: row => row.category_ru,
+        field: 'name',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
-        name: 'amount',
+        name: 'subcategory_amount',
         label: `${$t('categories.table.tableHead.subCategoryAmount')}`,
-        field: row => !row.ru[0] ? 0 : row.ru.length,
+        field: 'subcategory_amount',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left',
       },
       {
-        name: 'subCategories',
+        name: 'subcategories',
         label: `${$t('categories.table.tableHead.subCategories')}`,
-        field: row => row.ru,
+        field: 'subcategories',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
@@ -62,21 +62,21 @@
       </q-th>
     </template>
 
-    <template #header-cell-category="props">
+    <template #header-cell-name="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-amount="props">
+    <template #header-cell-subcategory_amount="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-subCategories="props">
+    <template #header-cell-subcategories="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
@@ -94,10 +94,10 @@
     <!-- BODY  -->
 
     <!-- SUB_CATEGORIES -->
-    <template #body-cell-subCategories="props">
+    <template #body-cell-subcategories="props">
       <q-td :props="props">
-        <q-chip v-if="props.row.ru" v-for="(item, index) in props.row.ru" :key="index" style="background-color: #9CDAFF;"
-          square text-color="dark" class="justify-center" icon-remove="close">
+        <q-chip v-for="(item, index) in props.row.subcategories" :key="index" style="background-color: #9CDAFF;" square
+          text-color="dark" class="justify-center">
           {{ item }}
         </q-chip>
 
@@ -121,14 +121,14 @@
                 </q-btn>
               </q-item-section>
             </q-item>
-            <!-- <q-item v-close-popup>
+            <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
                   <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
                   Дублировать
                 </q-btn>
               </q-item-section>
-            </q-item> -->
+            </q-item>
             <q-item v-close-popup>
               <q-item-section>
                 <q-btn @click="deleteCategory(props.row.id)" dense flat class="text-capitalize text-left"
@@ -169,7 +169,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
-          {{ data.pageInfo.total_count }} {{ $t('table.items') }}
+          {{ 1 }} {{ $t('table.items') }}
         </div>
 
         <q-space />
@@ -204,7 +204,7 @@ interface ISelected {
   id: number
   category: string
   amount: number
-  subCategories: string[]
+  subcategories: string[]
 }
 const categoriesStore = useCategoriesStore()
 const { t } = useI18n()
@@ -233,18 +233,12 @@ function clearSelections() {
 }
 
 function deleteCategory(id: number) {
-  categoriesStore.deleteCategory(id).then(() => {
-    Notify.create({
-      type: 'positive',
-      position: 'top-right',
-      message: t('notification.categories.deleted'),
-    })
-  }).catch(() => {
+  setTimeout(() => {
     Notify.create({
       type: 'negative',
       position: 'top-right',
-      message: t('notification.categories.deleteError'),
+      message: t('notification.categories.deleted'),
     })
-  })
+  }, 1000)
 }
 </script>
