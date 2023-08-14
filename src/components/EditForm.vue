@@ -78,7 +78,7 @@
 import { ref, onMounted } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
-import { useOrdersStore } from 'src/stores/moduls/orders';
+import { useOrdersStore } from 'src/stores/modules/orders';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { Notify } from 'quasar';

@@ -14,7 +14,7 @@
 import { onMounted } from 'vue'
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import CategoriesTable from 'src/pages/product/categories/CategoriesTable.vue'
-import { useCategoriesStore } from 'stores/moduls/products/categories'
+import { useCategoriesStore } from 'stores/modules/products/categories'
 
 const store = useCategoriesStore()
 

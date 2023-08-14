@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
-import { useAuthStore } from 'src/stores/moduls/auth'
+import { useAuthStore } from 'src/stores/modules/auth'
 import { ref, Ref, defineEmits } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'

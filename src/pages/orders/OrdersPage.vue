@@ -13,7 +13,7 @@
 import { onMounted } from 'vue'
 import OrdersTable from 'src/pages/orders/OrdersTable.vue'
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
-import { useOrdersStore } from 'src/stores/moduls/orders'
+import { useOrdersStore } from 'src/stores/modules/orders'
 
 const ordersStore = useOrdersStore()
 

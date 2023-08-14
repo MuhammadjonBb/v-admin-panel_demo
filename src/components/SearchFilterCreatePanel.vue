@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
-import { useModalStore } from 'src/stores/moduls/modal'
+import { useModalStore } from 'src/stores/modules/modal'
 
 const { dynamicRoute, isModal } = defineProps(['dynamicRoute', 'isModal'])
 const router = useRouter()

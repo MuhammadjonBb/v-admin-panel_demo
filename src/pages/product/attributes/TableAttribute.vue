@@ -3,47 +3,47 @@
     card-class="text-black" table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="store.listData.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-        {
-          name: 'id',
-          label: 'ID',
-          field: row => `#${row.id}`,
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'attribute_ru',
-          label: 'Название атрибута',
-          field: 'attribute_ru',
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'view',
-          label: 'Вид формы',
-          field: 'view',
-          sortable: true,
-          align: 'left',
-          headerStyle: 'background-color: #f2f2f2;',
-        },
-        {
-          name: 'goods',
-          label: 'Значение атрибута',
-          field: 'uz',
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
+      {
+        name: 'id',
+        label: 'ID',
+        field: row => `#${row.id}`,
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'attribute_ru',
+        label: 'Название атрибута',
+        field: 'attribute_ru',
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'view',
+        label: 'Вид формы',
+        field: 'view',
+        sortable: true,
+        align: 'left',
+        headerStyle: 'background-color: #f2f2f2;',
+      },
+      {
+        name: 'goods',
+        label: 'Значение атрибута',
+        field: 'uz',
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
 
-        {
-          name: 'action',
-          label: 'Action',
-          field: '',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'right'
-        }
-      ]">
+      {
+        name: 'action',
+        label: 'Action',
+        field: '',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'right'
+      }
+    ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -131,7 +131,8 @@
             </q-item>
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" @click="store.deleteAtribute(props.row.id)" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left" @click="store.deleteAtribute(props.row.id)"
+                  text-color="grey-8">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить
                 </q-btn>
@@ -188,13 +189,13 @@
       </div>
     </template>
     <!-- PAGINATION -->
-  </q-table>{{selected}}
+  </q-table>{{ selected }}
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import {useAboutStore} from "stores/moduls/products/attribute";
+import { useAboutStore } from "stores/modules/products/attribute";
 
 const store = useAboutStore()
 const router = useRouter()

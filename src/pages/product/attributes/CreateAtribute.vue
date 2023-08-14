@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import DefaultInput from 'components/input/DefaultInput.vue'
-import { useAboutStore } from "stores/moduls/products/attribute";
-import { useInputStore } from "stores/moduls/input";
+import { useAboutStore } from "stores/modules/products/attribute";
+import { useInputStore } from "stores/modules/input";
 import { storeToRefs } from "pinia";
 
 const lang = ref({

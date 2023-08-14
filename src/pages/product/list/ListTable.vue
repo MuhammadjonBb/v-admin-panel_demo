@@ -1,19 +1,4 @@
 <template>
-  <!--    <q-card  class="q-mb-md header__card">-->
-  <!--      <q-card-section class=" good" horizontal>-->
-  <!--        <q-card-section class="flex justify-center items-center" horizontal>-->
-  <!--          <q-checkbox  v-model="selectAll" class="select&#45;&#45;all" dense/>-->
-  <!--        </q-card-section>-->
-
-  <!--        <q-card-section  v-for="(colum) in columns" :key="colum.name" class="table__header flex justify-between items-center">-->
-  <!--          <span>{{ colum.label }}</span>-->
-  <!--          <q-btn v-show="colum.icon" dense rounded unelevated @click="SortedData(colum,Object.keys(colum))">-->
-  <!--            <q-icon size="16px" class="text-weight-bold" name="filter_list"/>-->
-  <!--          </q-btn>-->
-  <!--        </q-card-section>-->
-
-  <!--      </q-card-section>-->
-  <!--    </q-card>-->
   <q-table v-model:selected="selected" :columns="columns" :rows="store.listData" dense row-key="id" selection="multiple"
     class="q-mt-sm bg-grey-2 list__tab" flat table-style="overflow:visible; margin-top:30px;"
     table-header-style="font-weight: 500;font-size: 14px; background-color:white; position: relative; top: -20px; margin-bottom:30px;  z-index: 1;"
@@ -41,37 +26,33 @@
     </template>
     <template #body-cell-name="props">
       <q-td class="bg-white" :props="props">
-        <q-img style="border: 1px solid grey; border-radius: 5px" fit="scale-down" width="60px" height="30px" :src="`https://intex-shop-production.up.railway.app/${props.row.image[1]}`" class="q-mr-sm" />
-
-        {{ props.row.name_ru.slice(0,15)+'...' }}
+        {{ props.row.name }}
       </q-td>
     </template>
     <template #body-cell-status="data">
       <q-td class="bg-white" :props="data">
-        <q-btn size="10px" square :color="store.getStatusClass(data.row.status_ru)" class="full-width ">
-          {{ data.row.status_ru }}
-        </q-btn>
+        <!-- <q-btn  size="10px" square :color="store.getStatusClass(data.row.status_ru)" class="full-width ">
+          {{ data.row.status }}
+        </q-btn> -->
+        <q-chip square :color="store.getStatusClass(data.row.status)" class="full-width justify-center">
+          <!-- {{ props.row[`status_${getLocale()}`] }} -->
+          {{ data.row.status }}
+        </q-chip>
       </q-td>
     </template>
     <template #body-cell-price="props">
       <q-td class="bg-white" :props="props">
-        {{ props.row.price.toLocaleString('en-US') + ' сум' }}
+        {{ props.row.price.toLocaleString('en-US') + ' $' }}
       </q-td>
     </template>
     <template #body-cell-count="props">
-
       <q-td style="background-color: white" :props="props">
         {{ props.row.count }}
       </q-td>
     </template>
     <template #body-cell-category="props">
       <q-td class="bg-white" :props="props">
-        {{ props.row.category_ru }}
-      </q-td>
-    </template>
-    <template #body-cell-discount="props">
-      <q-td class="bg-white discount" style="background-color: white" :props="props">
-        {{ (props.row.discount_price.toLocaleString('uz-Uz') + ' сум') }}
+        {{ props.row.category }}
       </q-td>
     </template>
 
@@ -83,7 +64,8 @@
             <q-item v-close-popup>
               <q-item-section>
 
-                <q-btn dense flat class="text-capitalize text-left " :to="{path:`update/${data.row.id}`}" @click="store.getListId(data.row.id)" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left " :to="{ path: `update/${data.row.id}` }"
+                  @click="store.getListId(data.row.id)" text-color="grey-8">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -146,7 +128,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { useListStore } from "stores/moduls/products/list";
+import { useListStore } from "stores/modules/products/list";
 
 const selected = ref([]),
   selectAll = ref(false),
@@ -164,13 +146,6 @@ const selected = ref([]),
       icon: true
     },
     { name: 'price', align: 'left', label: 'Цена', field: (row: any) => row.price, icon: false },
-    {
-      name: 'discount',
-      label: 'Cо скидкой',
-      field: (row: any) => row.discount_price,
-      align: 'left',
-      icon: false
-    },
     { name: 'count', label: 'Кол-во', field: 'count', align: 'left', icon: true, sortable: true },
     { name: 'category', label: 'Категория', field: (row: any) => row.category_ru, align: 'left', icon: true, sortable: true },
     { name: 'status', label: 'Статус', field: (row: any) => row.status_ru, align: 'left', icon: false },

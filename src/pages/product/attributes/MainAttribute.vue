@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import SearchFilterCreatePanel from "components/SearchFilterCreatePanel.vue";
 import TableAttribute from "./TableAttribute.vue";
-import { onMounted} from "vue";
-import {useAboutStore} from "stores/moduls/products/attribute";
+import { onMounted } from "vue";
+import { useAboutStore } from "stores/modules/products/attribute";
 
 const store = useAboutStore()
 
 onMounted(() => {
   store.getAtributes()
-  console.log( 'Attribute',store.listData)
+  console.log('Attribute', store.listData)
 })
 </script>
 

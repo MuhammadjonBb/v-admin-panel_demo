@@ -3,61 +3,61 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-        {
-          name: 'id',
-          field: 'id',
-          label: 'ID',
-          sortable: true,
-          align: 'left'
-        },
-        {
-          name: 'name',
-          field: 'name',
-          label: `${$t('users.table.tableHead.name')}`,
-          sortable: true,
-          align: 'left'
-        },
-        {
-          name: 'role',
-          field: row => returnRole(row.role),
-          label: `${$t('users.table.tableHead.role')}`,
-          sortable: true,
-          align: 'left'
-        },
-        {
-          name: 'status',
-          field: 'status',
-          label: `${$t('users.table.tableHead.status')}`,
-          align: 'left'
-        },
-        {
-          name: 'phone',
-          field: 'phone',
-          label: `${$t('users.table.tableHead.phone')}`,
-          sortable: true,
-          align: 'left'
-        },
-        {
-          name: 'registerDate',
-          field: 'created_at',
-          label: `${$t('users.table.tableHead.registerDate')}`,
-          align: 'left'
-        },
-        {
-          name: 'birthDate',
-          field: 'birthDate',
-          label: `${$t('users.table.tableHead.birthday')}`,
-          sortable: true,
-          align: 'left'
-        },
-        {
-          name: 'action',
-          label: 'Action',
-          field: '',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'right'
-        }
-      ]">
+      {
+        name: 'id',
+        field: 'id',
+        label: 'ID',
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'name',
+        field: 'name',
+        label: `${$t('users.table.tableHead.name')}`,
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'role',
+        field: row => returnRole(row.role),
+        label: `${$t('users.table.tableHead.role')}`,
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'status',
+        field: 'status',
+        label: `${$t('users.table.tableHead.status')}`,
+        align: 'left'
+      },
+      {
+        name: 'phone',
+        field: 'phone',
+        label: `${$t('users.table.tableHead.phone')}`,
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'registerDate',
+        field: 'created_at',
+        label: `${$t('users.table.tableHead.registerDate')}`,
+        align: 'left'
+      },
+      {
+        name: 'birthDate',
+        field: 'birthDate',
+        label: `${$t('users.table.tableHead.birthday')}`,
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'action',
+        label: 'Action',
+        field: '',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'right'
+      }
+    ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -235,9 +235,9 @@
 <script setup lang="ts">
 import beautifyDate from 'src/helpers/beautifyDate';
 import { useRouter } from 'vue-router';
-import { useModalStore } from 'src/stores/moduls/modal';
+import { useModalStore } from 'src/stores/modules/modal';
 import { ref } from 'vue'
-import { useUsersStore } from 'src/stores/moduls/users';
+import { useUsersStore } from 'src/stores/modules/users';
 import { Notify } from 'quasar';
 import { useI18n } from 'vue-i18n';
 

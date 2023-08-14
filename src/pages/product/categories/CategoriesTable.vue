@@ -3,46 +3,46 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-        {
-          name: 'id',
-          label: 'ID',
-          field: 'id',
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'category',
-          label: `${$t('categories.table.tableHead.categoryName')}`,
-          field: row => row.category_ru,
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'amount',
-          label: `${$t('categories.table.tableHead.subCategoryAmount')}`,
-          field: row => !row.ru[0] ? 0 : row.ru.length,
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left',
-        },
-        {
-          name: 'subCategories',
-          label: `${$t('categories.table.tableHead.subCategories')}`,
-          field: row => row.ru,
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'actions',
-          label: '',
-          field: 'actions',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'right'
-        }
-      ]">
+      {
+        name: 'id',
+        label: 'ID',
+        field: 'id',
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'category',
+        label: `${$t('categories.table.tableHead.categoryName')}`,
+        field: row => row.category_ru,
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'amount',
+        label: `${$t('categories.table.tableHead.subCategoryAmount')}`,
+        field: row => !row.ru[0] ? 0 : row.ru.length,
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left',
+      },
+      {
+        name: 'subCategories',
+        label: `${$t('categories.table.tableHead.subCategories')}`,
+        field: row => row.ru,
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'actions',
+        label: '',
+        field: 'actions',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'right'
+      }
+    ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -195,7 +195,7 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useCategoriesStore } from 'src/stores/moduls/products/categories';
+import { useCategoriesStore } from 'src/stores/modules/products/categories';
 import { Notify } from 'quasar';
 import { useI18n } from 'vue-i18n';
 

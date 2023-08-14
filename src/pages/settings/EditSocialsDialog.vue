@@ -54,8 +54,8 @@
 
 <script setup lang="ts">
 import { Ref, onMounted, ref, watch, } from 'vue'
-import { useModalStore } from 'src/stores/moduls/modal'
-import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
+import { useModalStore } from 'src/stores/modules/modal'
+import { useSiteSettingsStore } from 'src/stores/modules/siteSettings'
 import { Notify } from 'quasar'
 import { useI18n } from 'vue-i18n'
 

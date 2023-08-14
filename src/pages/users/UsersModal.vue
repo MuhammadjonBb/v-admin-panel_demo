@@ -91,10 +91,10 @@ import { ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
-import { useModalStore } from 'src/stores/moduls/modal'
+import { useModalStore } from 'src/stores/modules/modal'
 import { Notify } from 'quasar'
 import { useI18n } from 'vue-i18n'
-import { useUsersStore } from 'src/stores/moduls/users'
+import { useUsersStore } from 'src/stores/modules/users'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import cutPhoneString from "src/helpers/cutPhoneString"
 

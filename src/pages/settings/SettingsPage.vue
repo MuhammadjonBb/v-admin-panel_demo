@@ -124,8 +124,8 @@
 import { Ref, onMounted, ref, watch } from 'vue'
 import EditSocialsDialog from 'src/pages/settings/EditSocialsDialog.vue'
 import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
-import { useModalStore } from 'src/stores/moduls/modal';
-import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
+import { useModalStore } from 'src/stores/modules/modal';
+import { useSiteSettingsStore } from 'src/stores/modules/siteSettings'
 import { useI18n } from 'vue-i18n'
 import { Notify } from 'quasar'
 

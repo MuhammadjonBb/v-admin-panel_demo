@@ -113,7 +113,7 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 import DefaultInput from 'src/components/input/DefaultInput.vue'
-import { useCategoriesStore } from 'src/stores/moduls/products/categories'
+import { useCategoriesStore } from 'src/stores/modules/products/categories'
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 

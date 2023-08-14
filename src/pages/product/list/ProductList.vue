@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import SearchFilterCreatePanel from "components/SearchFilterCreatePanel.vue";
 import ListTable from "./ListTable.vue";
-import { useListStore } from "stores/moduls/products/list";
+import { useListStore } from "stores/modules/products/list";
 const store = useListStore()
 onMounted(() => {
   store.getList()
@@ -12,7 +12,7 @@ onMounted(() => {
 <template>
   <div class="q-px-md q-mb-sm main__container">
     <div class="text-h5 text-weight-bold q-my-md">
-      sdfsdf
+      {{ $t('product.title') }}
     </div>
     <SearchFilterCreatePanel :dynamicRoute="'create'" :isModal="false" />
     <ListTable />

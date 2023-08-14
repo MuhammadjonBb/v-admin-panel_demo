@@ -16,7 +16,7 @@
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import FeedbackTable from 'src/pages/feedback/FeedbackTable.vue'
 import FeedbackModal from 'src/pages/feedback/FeedbackModal.vue'
-import { useFeedbackStore } from 'src/stores/moduls/feedback'
+import { useFeedbackStore } from 'src/stores/modules/feedback'
 import { Ref, ref } from 'vue';
 
 const feedbackStore = useFeedbackStore()

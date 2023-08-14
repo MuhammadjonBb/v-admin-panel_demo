@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { api } from 'boot/axios'
-import { useInputStore } from "stores/moduls/input";
+import { useInputStore } from "stores/modules/input";
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 
 const inputStore = useInputStore()

@@ -15,7 +15,7 @@
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import UsersTable from 'src/pages/users/UsersTable.vue'
 import UserModal from 'src/pages/users/UsersModal.vue'
-import { useUsersStore } from 'src/stores/moduls/users'
+import { useUsersStore } from 'src/stores/modules/users'
 import { reactive, ref } from 'vue';
 
 const usersStore = useUsersStore()

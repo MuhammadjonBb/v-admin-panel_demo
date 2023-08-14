@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
-import { useInputStore } from "stores/moduls/input";
+import { useInputStore } from "stores/modules/input";
 import { reactive } from "vue";
 import { Notify } from 'quasar'
 const inputStore = useInputStore()
