@@ -5,7 +5,7 @@
       <q-card class="row q-pa-lg no-wrap" flat v-if="user">
         <q-card-section class="column items-center justify-center" style="width: 30%;">
           <q-avatar class="text-grey-7" color="grey-4" icon="person" size="170px"></q-avatar>
-          <div class="text-medium q-mt-md text-h6">{{ user.first_name }} {{ user.last_name }}</div>
+          <div class="text-medium q-mt-md text-h6">{{ user.name }}</div>
         </q-card-section>
         <q-card-section class="full-width">
           <div class="row items-center">
@@ -23,7 +23,7 @@
 
               <q-item style="width: 350px;" class="column q-mb-md">
                 <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">E-mail</q-item-label>
-                <q-item-label class="q-pl-md q-pt-md">{{ user.email }}</q-item-label>
+                <q-item-label class="q-pl-md q-pt-md">{{ user.phone }}</q-item-label>
               </q-item>
             </q-list>
 
@@ -31,13 +31,13 @@
               <q-item style="width: 350px;" class="column q-mb-md">
                 <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{ $t('users.table.tableHead.birthday')
                 }}</q-item-label>
-                <q-item-label class="q-pl-md q-pt-md">{{ user.birth_date }} </q-item-label>
+                <q-item-label class="q-pl-md q-pt-md">{{ user.birthday }} </q-item-label>
               </q-item>
 
               <q-item style="width: 350px;" class="column q-mb-md">
                 <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{
                   $t('users.table.tableHead.registerDate') }}</q-item-label>
-                <q-item-label class="q-pl-md q-pt-md">{{ beautifyDate(user.created_at)[0] }}</q-item-label>
+                <q-item-label class="q-pl-md q-pt-md">{{ beautifyDate(user.register_date)[0] }}</q-item-label>
               </q-item>
             </q-list>
             <q-list class="row">
@@ -50,7 +50,7 @@
               <q-item style="width: 350px;" class="column q-mb-md">
                 <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{ $t('users.table.tableHead.role')
                 }}</q-item-label>
-                <q-item-label class="q-pl-md q-pt-md">{{ returnRole(user.role) }}</q-item-label>
+                <q-item-label class="q-pl-md q-pt-md">{{ user.role }}</q-item-label>
               </q-item>
             </q-list>
           </div>
@@ -77,7 +77,7 @@ function onEditClick() {
 }
 
 function getUserInfo() {
-  return usersStore.users.result.find((user: any) => user.id == route.params.id)
+  return usersStore.users.find((user: any) => user.id == route.params.id)
 }
 onMounted(() => {
   user.value = getUserInfo()

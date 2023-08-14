@@ -3,15 +3,14 @@ import { api } from 'src/boot/axios'
 
 export const useUsersStore = defineStore('users', {
   state: () => ({
-    users: null,
+    users: [],
   }),
 
   actions: {
     getUsers() {
-      api.get('users?current_page=1')
-        .then(r => {
-          this.users = r.data
-        })
+      import("src/fake-data/users").then(res => {
+        this.users = res.default
+      })
     },
     createUser(data: object) {
       return api.post('users', { ...data }).then(() => {

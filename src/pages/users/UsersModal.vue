@@ -166,10 +166,6 @@ const select = ref({
 const profileImg = ref()
 const props = defineProps(['label', 'modalName', 'userData'])
 
-watch(() => props.userData, () => {
-  setInputValues()
-})
-
 if (props.modalName === 'edit') {
   form.value.name = props?.userData?.first_name
 }
@@ -197,42 +193,21 @@ function save() {
   })
 
   if (props.modalName === 'create') {
-    usersStore.createUser(data.value).then(() => {
-      closeModal()
-      Notify.create({
-        color: 'positive',
-        textColor: 'white',
-        icon: 'done',
-        message: t('notification.users.created'),
-        position: 'top-right',
-      })
-    }).catch(() => {
-      Notify.create({
-        color: 'negative',
-        textColor: 'white',
-        icon: 'warning',
-        position: 'top-right',
-        message: t('notification.users.createError'),
-      })
+    closeModal()
+    Notify.create({
+      color: 'positive',
+      textColor: 'white',
+      icon: 'done',
+      message: t('notification.users.created'),
+      position: 'top-right',
     })
   } else if (props.modalName === 'edit') {
-    const editObject = Object.assign(data.value, { id: Number(props.userData.id) })
-    usersStore.editUser(editObject).then(() => {
-      Notify.create({
-        color: 'positive',
-        textColor: 'white',
-        icon: 'done',
-        message: t('notification.users.edited'),
-        position: 'top-right',
-      })
-    }).catch(() => {
-      Notify.create({
-        color: 'negative',
-        textColor: 'white',
-        icon: 'warning',
-        message: t('notification.users.editError'),
-        position: 'top-right',
-      })
+    Notify.create({
+      color: 'positive',
+      textColor: 'white',
+      icon: 'done',
+      message: t('notification.users.edited'),
+      position: 'top-right',
     })
   }
 }
@@ -246,13 +221,6 @@ function closeModal() {
   form.value.birth = ''
   form.value.newPassword = ''
   form.value.confirmPassword = ''
-}
-
-function setInputValues() {
-  form.value.name = props?.userData?.first_name
-  form.value.surname = props?.userData?.last_name
-  form.value.email = props?.userData?.email
-  form.value.phone = cutPhoneString(props?.userData?.phone)
 }
 </script>
 
