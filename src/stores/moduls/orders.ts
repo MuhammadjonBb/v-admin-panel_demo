@@ -33,13 +33,9 @@ export const useOrdersStore: any = defineStore('orders', {
 
   actions: {
     getOrders() {
-      api.get('orders?current_page=1')
-        .then(r => {
-          this.orders = r.data
-          console.log(this.orders);
-        }).catch(e => {
-          console.log(e)
-        })
+      import("src/fake-data/orders").then((orders) => {
+        this.orders = orders.default
+      })
     },
     createOrder(userData: any) {
       const data = {
@@ -56,16 +52,16 @@ export const useOrdersStore: any = defineStore('orders', {
       return api.post('orders', data)
     },
     getProducts() {
-      api.get('products').then(r => {
-        this.products = r.data
-        this.mapProducts()
-        this.selectedProducts.push({
-          id: this.mappedProducts[0].id,
-          label: this.mappedProducts[0].label,
-          amount: this.mappedProducts[0].amount,
-          cost: this.mappedProducts[0].price
-        })
-      })
+      // api.get('products').then(r => {
+      //   this.products = r.data
+      //   this.mapProducts()
+      //   this.selectedProducts.push({
+      //     id: this.mappedProducts[0].id,
+      //     label: this.mappedProducts[0].label,
+      //     amount: this.mappedProducts[0].amount,
+      //     cost: this.mappedProducts[0].price
+      //   })
+      // })
     },
     mapProducts() {
       this.products.result.map(p => {

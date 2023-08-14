@@ -1,75 +1,75 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
-    selection="multiple" :columns="[
-        {
-          name: 'id',
-          label: `${$t('orders.table.tableHead.orderNum')}`,
-          field: 'order_number',
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'client',
-          label: `${$t('orders.table.tableHead.clientName')}`,
-          field: 'first_name',
-          sortable: true,
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'phone',
-          label: `${$t('orders.table.tableHead.phone')}`,
-          field: 'phone',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left',
-        },
-        {
-          name: 'address',
-          label: `${$t('orders.table.tableHead.address')}`,
-          field: 'address',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'count',
-          label: `${$t('orders.table.tableHead.products')}`,
-          field: 'count',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left',
-          sortable: true,
-        },
-        {
-          name: 'total_price',
-          label: `${$t('orders.table.tableHead.cost')}`,
-          field: row => beautifyPrice(row.total_price),
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'date',
-          label: `${$t('orders.table.tableHead.orderTime')}`,
-          field: 'created_at',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'left'
-        },
-        {
-          name: 'status',
-          label: `${$t('orders.table.tableHead.status')}`,
-          field: 'name_ru',
-          align: 'left',
-          headerStyle: 'background-color: #f2f2f2;',
-        },
-        {
-          name: 'action',
-          label: 'Action',
-          field: '',
-          headerStyle: 'background-color: #f2f2f2;',
-          align: 'right'
-        }
-      ]">
+    table-header-class="text-grey-7 q-pa-none" :rows="data" row-key="id" v-model:selected="selected" selection="multiple"
+    :columns="[
+      {
+        name: 'id',
+        label: `${$t('orders.table.tableHead.orderNum')}`,
+        field: 'order_id',
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'client',
+        label: `${$t('orders.table.tableHead.clientName')}`,
+        field: 'client_name',
+        sortable: true,
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'phone',
+        label: `${$t('orders.table.tableHead.phone')}`,
+        field: 'phone',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left',
+      },
+      {
+        name: 'address',
+        label: `${$t('orders.table.tableHead.address')}`,
+        field: 'address',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'products',
+        label: `${$t('orders.table.tableHead.products')}`,
+        field: 'products',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left',
+        sortable: true,
+      },
+      {
+        name: 'price',
+        label: `${$t('orders.table.tableHead.cost')}`,
+        field: 'price',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'date',
+        label: `${$t('orders.table.tableHead.orderTime')}`,
+        field: 'order_time',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'left'
+      },
+      {
+        name: 'status',
+        label: `${$t('orders.table.tableHead.status')}`,
+        field: 'status',
+        align: 'left',
+        headerStyle: 'background-color: #f2f2f2;',
+      },
+      {
+        name: 'action',
+        label: 'Action',
+        field: '',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'right'
+      }
+    ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -96,7 +96,7 @@
       </q-th>
     </template>
 
-    <template #header-cell-goods="props">
+    <template #header-cell-products="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
@@ -115,8 +115,8 @@
     <template #body-cell-date="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ beautifyDate(props.row.created_at[0])[0] }} </span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at[0])[1] }}</span>
+          <span> {{ beautifyDate(props.row.order_time[0])[0] }} </span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.order_time[0])[1] }}</span>
         </div>
       </q-td>
     </template>
@@ -125,19 +125,21 @@
     <!-- STATUS -->
     <template #body-cell-status="props">
       <q-td :props="props">
-        <q-chip square :color="getStatusClass(props.row.name_ru)" class="full-width justify-center">
-          {{ props.row[`name_${getLocale()}`] }}
+        <q-chip square :color="getStatusClass(props.row.status_ru)" class="full-width justify-center">
+          {{ props.row[`status_${getLocale()}`] }}
+          <!-- {{ props.row.status }} -->
         </q-chip>
       </q-td>
     </template>
     <!-- STATUS -->
 
     <!-- PRODUCTS -->
-    <template #body-cell-count="props">
-      <q-td :props="props" v-if="ordersStore.products">
+    <template #body-cell-products="props">
+      <q-td :props="props">
         <div style="color: #109EF4;text-decoration: underline; cursor: pointer;">
           <div>
-            {{ getRightWord(props.row.count) }}
+            {{ getRightWord(props.row.products) }}
+            <!-- {{ props.row.products }} -->
           </div>
         </div>
       </q-td>
@@ -154,20 +156,20 @@
             <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8"
-                  @click="toEditPage(props.row.order_number)">
+                  @click="toEditPage(props.row.order_id)">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
               </q-item-section>
             </q-item>
-            <!-- <q-item v-close-popup>
+            <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
                   <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
                   Дублировать
                 </q-btn>
               </q-item-section>
-            </q-item> -->
+            </q-item>
             <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
@@ -207,7 +209,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
-          {{ data.result.length }} {{ $t('table.items') }}
+          {{ data.length }} {{ $t('table.items') }}
         </div>
 
         <q-space />
