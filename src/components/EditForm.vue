@@ -47,11 +47,11 @@
           class="q-py-xs q-px-md q-mt-sm border-reset" borderless v-model="ordersStore.statusValalue"
           :options="ordersStore.statusOptions"></q-select>
       </label>
-      <!-- <label style="width: 50%;">
+      <label style="width: 50%;">
         Время заказа
         <q-input dense borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="date" v-model="orderDate"></q-input>
-      </label> -->
-      <!-- <label style="width: 33%;">
+      </label>
+      <label style="width: 33%;">
         Общяя цена
         <q-input dense clear-icon="" borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="number"
           v-model="price">
@@ -61,12 +61,12 @@
             </div>
           </template>
         </q-input>
-      </label> -->
+      </label>
     </div>
     <!-- ==================== -->
     <div class="row q-mt-lg">
       <q-space />
-      <q-btn color="indigo-10" flat :label="$t('btn.cancel')" style="border-radius: 12px;"
+      <q-btn color="indigo-10" flat :label="$t('btn.cancel')" @click="$router.go(-1)" style="border-radius: 12px;"
         class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
       <q-btn @click="createOrder()" color="white" flat :label="$t('btn.save')" style="border-radius: 12px;"
         class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
@@ -106,7 +106,7 @@ if (route.params.id && ordersStore.orders) {
   const thisOrder = getOrder(route.params.id)
 }
 function getOrder(id: any) {
-  return ordersStore.orders.result.find((item: any) => item.order_number === `#${id}`)
+  return ordersStore.orders.find((item: any) => item.order_number === id)
 }
 
 
@@ -119,20 +119,11 @@ function createOrder() {
     })
     return
   }
-  ordersStore.createOrder(form.value).then(() => {
-    Notify.create({
-      color: 'positive',
-      textColor: 'white',
-      message: t('notification.orders.created'),
-      position: 'top-right',
-    })
-  }).catch(() => {
-    Notify.create({
-      color: 'negative',
-      textColor: 'white',
-      message: t('notification.orders.createError'),
-      position: 'top-right',
-    })
+  Notify.create({
+    color: 'positive',
+    textColor: 'white',
+    message: t('notification.orders.created'),
+    position: 'top-right',
   })
 }
 

@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { api } from 'src/boot/axios'
 import { useInputStore } from './input'
 
 const inputStore = useInputStore()
@@ -52,23 +51,18 @@ export const useOrdersStore: any = defineStore('orders', {
       return api.post('orders', data)
     },
     getProducts() {
-      // api.get('products').then(r => {
-      //   this.products = r.data
-      //   this.mapProducts()
-      //   this.selectedProducts.push({
-      //     id: this.mappedProducts[0].id,
-      //     label: this.mappedProducts[0].label,
-      //     amount: this.mappedProducts[0].amount,
-      //     cost: this.mappedProducts[0].price
-      //   })
-      // })
+      import("src/fake-data/products").then((products) => {
+        this.products = products.default
+        this.mapProducts()
+      })
     },
     mapProducts() {
-      this.products.result.map(p => {
+      this.products.map(p => {
+        console.log(p)
         this.mappedProducts.push({
           id: p.id,
-          label: p.name_ru,
-          price: p.discount_price ? p.discount_price : p.price,
+          label: p.name,
+          price: p.price,
           amount: p.count
         })
       })
