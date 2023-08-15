@@ -57,7 +57,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: '/v-admin-panel_demo/',
       // analyze: true,
       // env: {},
       // rawDefine: {}

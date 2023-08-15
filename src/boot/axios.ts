@@ -39,25 +39,25 @@ export default boot(({ app, router }) => {
   }, function (e) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    if (e.response.status === 401) {
-      router.push('/login')
-      if (localStorage.getItem('token') === null || e.response.data.error.name === "UnauthorizedException") {
-        Notify.create({
-          group: false,
-          type: 'negative',
-          message: 'User is not authorized',
-          position: 'top-right',
-        })
-      } else if (e.response.data.error.name === 'JsonWebTokenError' || e.response.data.error.name === 'TokenExpiredError') {
-        Notify.create({
-          group: false,
-          type: 'negative',
-          message: 'Token expired, please login again',
-          position: 'top-right',
-        })
-      }
-    }
-    return Promise.reject(e);
+    // if (e.response.status === 401) {
+    //   router.push('/login')
+    //   if (localStorage.getItem('token') === null || e.response.data.error.name === "UnauthorizedException") {
+    //     Notify.create({
+    //       group: false,
+    //       type: 'negative',
+    //       message: 'User is not authorized',
+    //       position: 'top-right',
+    //     })
+    //   } else if (e.response.data.error.name === 'JsonWebTokenError' || e.response.data.error.name === 'TokenExpiredError') {
+    //     Notify.create({
+    //       group: false,
+    //       type: 'negative',
+    //       message: 'Token expired, please login again',
+    //       position: 'top-right',
+    //     })
+    //   }
+    // }
+    // return Promise.reject(e);
 
   })
 })
