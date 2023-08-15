@@ -1,0 +1,1 @@
+var e=[{id:1,name:"\u0414\u043B\u0438\u043D\u0430",view:"Range",value:["\u041C\u0438\u043D","\u041C\u0430x","0","10 000 000"]},{id:2,name:"\u0412\u044B\u0441\u043E\u0442\u0430",view:"Dropdown",value:["250 cm","260 cm","270 cm"]},{id:3,name:"\u041E\u0431\u044A\u0435\u043C",view:"Checkbox",value:["250 \u0441\u043C","260 \u0441\u043C","270 \u0441\u043C"]}];export{e as default};
