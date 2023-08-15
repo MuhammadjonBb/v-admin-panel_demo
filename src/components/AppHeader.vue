@@ -18,16 +18,25 @@
             <template #option="scope">
               <q-item class="row" v-bind="scope.itemProps">
                 <q-item-section class="no-wrap items-center" style="flex-direction: row;">
-                  <img :src="`../src/assets/lang/${(scope.index)}-lang.png`" alt="язык" style="width: 28px; height: 20px;"
-                    class="q-mr-sm">
+                  <img v-if="scope.index === 0" :src="`../src/assets/lang/0-lang.png`" alt="язык"
+                    style="width: 28px; height: 20px;" class="q-mr-sm">
+                  <img v-else-if="scope.index === 1" :src="`../src/assets/lang/1-lang.png`" alt="язык"
+                    style="width: 28px; height: 20px;" class="q-mr-sm">
+                  <img v-else-if="scope.index === 2" :src="`../src/assets/lang/2-lang.png`" alt="язык"
+                    style="width: 28px; height: 20px;" class="q-mr-sm">
+
                   <span>{{ scope.opt.label }}</span>
                 </q-item-section>
               </q-item>
             </template>
 
             <template v-slot:prepend>
-              <img :src="`../src/assets/lang/${options.findIndex((v: any) => v.value === selectValue)}-lang.png`"
-                alt="язык" style="width: 28px;height: 20px;" class="q-mr-xs">
+              <img v-if="options.findIndex((v: any) => v.value === selectValue) === 0"
+                :src="`../src/assets/lang/0-lang.png`" alt="язык" style="width: 28px; height: 20px;" class="q-mr-sm">
+              <img v-else-if="options.findIndex((v: any) => v.value === selectValue) === 1"
+                :src="`../src/assets/lang/1-lang.png`" alt="язык" style="width: 28px; height: 20px;" class="q-mr-sm">
+              <img v-else-if="options.findIndex((v: any) => v.value === selectValue) === 2"
+                :src="`../src/assets/lang/2-lang.png`" alt="язык" style="width: 28px; height: 20px;" class="q-mr-sm">
             </template>
           </q-select>
         </q-item>
